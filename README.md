@@ -1,5 +1,7 @@
 # Askyte
 
+https://askyte.vercel.app/
+
 Askyte is a full-stack LLM-powered AI assistant built with Next.js, TypeScript, Tailwind CSS, Groq, and Supabase.
 
 It supports multi-turn conversations, quick actions, user authentication, persistent chat history, guest mode, Markdown rendering, and responsive layouts.
