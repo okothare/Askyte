@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Askyte
 
-## Getting Started
+Askyte is a full-stack LLM-powered AI assistant built with Next.js, TypeScript, Tailwind CSS, Groq, and Supabase.
 
-First, run the development server:
+It supports multi-turn conversations, quick actions, user authentication, persistent chat history, guest mode, Markdown rendering, and responsive layouts.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- AI-powered text conversations
+- Multi-turn conversation context
+- Quick actions for:
+  - Summarize
+  - Explain
+  - Plan
+  - Rewrite
+  - Compare
+- Markdown and table rendering
+- Multiple chat conversations
+- Guest mode with temporary chats
+- Email/password authentication
+- Persistent chat history for signed-in users
+- Secure per-user chat ownership
+- Delete chat functionality
+- Responsive desktop and mobile UI
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Groq API
+- Supabase
+- PostgreSQL
+- Vercel
 
-## Learn More
+## How It Works
 
-To learn more about Next.js, take a look at the following resources:
+The frontend sends user prompts to a Next.js API route, which forwards the conversation to a Groq-hosted language model.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Signed-in users have their chats and messages stored in Supabase. Guest users can use the assistant without creating an account, but their chat history is cleared when the page is refreshed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Protected API routes verify Supabase access tokens before reading or modifying saved conversations.
