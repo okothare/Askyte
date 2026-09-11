@@ -1,5 +1,8 @@
 "use client";
 
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -22,6 +25,14 @@ type Chat = {
 
 // Quick actions prefill the message box with common prompt types.
 const quickActions = ["Summarize", "Explain", "Plan", "Rewrite", "Compare"];
+
+const formatMath = (content: string) => {
+  return content
+    .replace(/\\\[/g, "$$")
+    .replace(/\\\]/g, "$$")
+    .replace(/\\\(/g, "$")
+    .replace(/\\\)/g, "$");
+};
 
 export default function Home() {
   // Main UI state for the current input, conversations, loading state, and user session.
@@ -604,7 +615,8 @@ export default function Home() {
                       <div className="prose prose-invert max-w-none overflow-x-auto">
                         {/* Render assistant responses with Markdown and GitHub-style tables. */}
                         <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
+                          remarkPlugins={[remarkGfm, remarkMath]}
+                          rehypePlugins={[rehypeKatex]}
                           components={{
                             table: ({ children }) => (
                               <table className="my-4 w-full border-collapse text-left text-sm">
@@ -623,7 +635,7 @@ export default function Home() {
                             ),
                           }}
                         >
-                          {message.content}
+                          {formatMath(message.content)}
                         </ReactMarkdown>
                       </div>
                     ) : (
